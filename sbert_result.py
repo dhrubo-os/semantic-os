@@ -27,14 +27,7 @@ def generate_sbert_result(corpus, queries, model_name, k_values, batch_size=16):
     #### Load the SBERT model and retrieve using cosine-similarity
     model = DRES(models.SentenceBERT(model_name), batch_size=batch_size)
 
-    # dataset = "nfcorpus"
-    # url = "https://public.ukp.informatik.tu-darmstadt.de/thakur/BEIR/datasets/{}.zip".format(dataset)
-    # out_dir = os.path.join(pathlib.Path(__file__).parent.absolute(), "datasets")
-    # data_path = util.download_and_unzip(url, out_dir)
-    #
-    # corpus, queries, qrels = GenericDataLoader(data_path).load(split="test")
-
-    retriever = EvaluateRetrieval(model, score_function="cos_sim",
+    retriever = EvaluateRetrieval(model, score_function="dot",
                                   k_values=k_values)  # or "cos_sim" for cosine similarity
     results = retriever.retrieve(corpus, queries)
 
