@@ -7,7 +7,10 @@ class IValueProcessing(nn.Module):
         super(IValueProcessing, self).__init__()
 
     def forward(self, testInput: torch.Tensor):
-        return torch.sum(testInput)
+        sumValue: torch.Tensor = torch.sum(testInput)
+        print("Testing if the model executed or not")
+        print(sumValue)
+        return sumValue
 
 
 jit_processing = torch.jit.script(IValueProcessing())
